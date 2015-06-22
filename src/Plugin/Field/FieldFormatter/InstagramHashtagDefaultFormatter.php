@@ -27,6 +27,8 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items) {
+    $instagramConfig = \Drupal::config('itk_instagram_hashtag.settings');
+
     $elements = array();
     foreach ($items as $delta => $item) {
       // Render output using itk_instagram_hashtag_default theme.
@@ -39,10 +41,10 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
           ),
           'drupalSettings' => array(
             'itkInstagramHashtag' => array(
-              'clientId' => 'test',
-              'resolution' => 'low_resolution',
-              'sortBy' => 'most-recent',
-              'limit' => 12,
+              'clientId' => $instagramConfig->get('itk_instagram_hashtag.client_id'),
+              'resolution' => $instagramConfig->get('itk_instagram_hashtag.resolution'),
+              'sortBy' => $instagramConfig->get('itk_instagram_hashtag.sort_by'),
+              'limit' => $instagramConfig->get('itk_instagram_hashtag.limit'),
             ),
           ),
         )
