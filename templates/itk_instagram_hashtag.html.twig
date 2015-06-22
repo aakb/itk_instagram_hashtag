@@ -1,12 +1,4 @@
-
-
-<div id="instafeed"></div>
-<div>#{{ item.content }}</div>
-<script type="text/javascript">
-  var feed = new Instafeed({
-    get: 'tagged',
-    tagName: '{{ item.content }}',
-    clientId: 'YOUR_CLIENT_ID'
-  });
-  feed.run();
-</script>
+<div class="instagram-hashtag--container">
+  <div class="instagram-hashtag--title">#{{ instagram_hashtag }}</div>
+  <div class="instagram-hashtag--content" id="instafeed--{{ instagram_hashtag }}"></div>
+</div>

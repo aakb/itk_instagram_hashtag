@@ -6,9 +6,9 @@
 
 namespace Drupal\itk_instagram_hashtag\Plugin\Field\FieldFormatter;
 
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Component\Utility\String;
 
 /**
  * Plugin implementation of the 'field_instagram_hashtag_default_formatter' formatter.
@@ -32,10 +32,23 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
       // Render output using itk_instagram_hashtag_default theme.
       $source = array(
         '#theme' => 'itk_instagram_hashtag_default_theme',
-        '#instagram_hashtag' => String::checkPlain($item->value),
+        '#instagram_hashtag' => SafeMarkup::checkPlain($item->value),
+        '#attached' => array(
+          'library' => array(
+            'itk_instagram_hashtag/base'
+          ),
+          'drupalSettings' => array(
+            'itkInstagramHashtag' => array(
+              'clientId' => 'test',
+              'resolution' => 'low_resolution',
+              'sortBy' => 'most-recent',
+              'limit' => 12,
+            ),
+          ),
+        )
       );
 
-      $elements[$delta] = array('#markup' => drupal_render($source));
+      $elements[$delta] = array('#markup' => \Drupal::service('renderer')->render($source));
     }
 
     return $elements;
