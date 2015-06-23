@@ -8,8 +8,6 @@ namespace Drupal\itk_instagram_hashtag\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Entity\File;
-
 
 /**
  * Class InstagramHashtagSettingsForm.
@@ -90,5 +88,8 @@ class InstagramHashtagSettingsForm extends FormBase {
       ->set('itk_instagram_hashtag.sort_by', $form_state->getValue('sort_by'))
       ->set('itk_instagram_hashtag.limit', $form_state->getValue('limit'))
       ->save();
+
+    // Make sure the new settings are available to the js.
+    \Drupal::cache('render')->deleteAll();
   }
 }

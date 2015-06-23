@@ -1,8 +1,5 @@
 base:
   version: 1.x
-  css:
-    theme:
-      css/itk-instagram-hashtag.css: {}
   js:
     js/min/instafeed.min.js: {}
     js/itk-instagram-hashtag.js: {}
