@@ -31,10 +31,13 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
 
     $elements = array();
     foreach ($items as $delta => $item) {
+      // Remove # from instagram_hashtag
+      $instagramHashtag = str_replace('#', '', SafeMarkup::checkPlain($item->value));
+
       // Render output using itk_instagram_hashtag_default theme.
       $source = array(
         '#theme' => 'itk_instagram_hashtag_default_theme',
-        '#instagram_hashtag' => SafeMarkup::checkPlain($item->value),
+        '#instagram_hashtag' => $instagramHashtag,
         '#attached' => array(
           'library' => array(
             'itk_instagram_hashtag/base'
@@ -45,6 +48,7 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
               'resolution' => $instagramConfig->get('itk_instagram_hashtag.resolution'),
               'sortBy' => $instagramConfig->get('itk_instagram_hashtag.sort_by'),
               'limit' => $instagramConfig->get('itk_instagram_hashtag.limit'),
+              'enableCaption' => $instagramConfig->get('itk_instagram_hashtag.enable_caption'),
             ),
           ),
         )

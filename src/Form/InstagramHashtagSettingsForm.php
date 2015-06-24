@@ -67,6 +67,13 @@ class InstagramHashtagSettingsForm extends FormBase {
       '#required' => TRUE,
     );
 
+    $form['itk_instagram_hashtag_settings']['enable_caption'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Should caption be displayed?'),
+      '#default_value' => $config->get('itk_instagram_hashtag.enable_caption'),
+      '#required' => FALSE,
+    );
+
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Save changes'),
@@ -87,6 +94,7 @@ class InstagramHashtagSettingsForm extends FormBase {
       ->set('itk_instagram_hashtag.resolution', $form_state->getValue('resolution'))
       ->set('itk_instagram_hashtag.sort_by', $form_state->getValue('sort_by'))
       ->set('itk_instagram_hashtag.limit', $form_state->getValue('limit'))
+      ->set('itk_instagram_hashtag.enable_caption', $form_state->getValue('enable_caption'))
       ->save();
 
     // Make sure the new settings are available to the js.
