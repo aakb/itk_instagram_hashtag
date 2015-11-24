@@ -26,7 +26,7 @@ class InstagramHashtagDefaultFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items) {
+  public function viewElements(FieldItemListInterface $items, $langcode) {
     $instagramConfig = \Drupal::config('itk_instagram_hashtag.settings');
 
     $elements = array();
